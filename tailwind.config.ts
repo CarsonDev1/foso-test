@@ -8,12 +8,20 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      screens: {
+        'xl': '1650px',
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        primary: "#15AA7A",
+        title: "#050505",
+        sub: "#33404A",
+        content: "#231F20",
       },
     },
   },
   plugins: [],
 };
+
 export default config;
