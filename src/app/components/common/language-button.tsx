@@ -1,7 +1,7 @@
 import { ChevronDown } from 'lucide-react';
 
 const LanguageSwitcher = () => (
-	<div className='relative group'>
+	<div className='relative group w-fit'>
 		<button className='flex items-center space-x-2 bg-gray-100 rounded-full px-3 py-2'>
 			<div className='rounded-full'>
 				<svg xmlns='http://www.w3.org/2000/svg' width='25' height='25' viewBox='0 0 25 25' fill='none'>

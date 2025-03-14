@@ -26,6 +26,30 @@ export default function Header() {
 		setActiveDropdown(activeDropdown === name ? null : name);
 	};
 
+	const enableScrolling = () => {
+		document.body.style.overflow = '';
+		document.body.style.paddingRight = '';
+	};
+
+	const disableScrolling = () => {
+		document.body.style.overflow = 'hidden';
+		document.body.style.paddingRight = 'var(--scrollbar-width, 0px)';
+	};
+
+	const toggleMobileMenu = () => {
+		if (mobileMenuOpen) {
+			enableScrolling();
+		} else {
+			disableScrolling();
+		}
+		setMobileMenuOpen(!mobileMenuOpen);
+	};
+
+	const closeMobileMenu = () => {
+		enableScrolling();
+		setMobileMenuOpen(false);
+	};
+
 	return (
 		<header className='w-full max-w-7xl mx-auto pt-3 md:pt-6 sticky top-0 left-0 z-50'>
 			<div className='w-full mx-auto px-4 md:px-9 py-2 md:py-3 flex items-center justify-between lg:justify-around rounded-[40px] bg-white/65 shadow-lg backdrop-blur-md'>
@@ -77,7 +101,7 @@ export default function Header() {
 					<CustomerButton />
 				</div>
 
-				<button className='lg:hidden' onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+				<button className='lg:hidden' onClick={toggleMobileMenu}>
 					{mobileMenuOpen ? (
 						<X className='h-6 w-6 text-gray-700' />
 					) : (
@@ -88,7 +112,7 @@ export default function Header() {
 
 			<div
 				className={cn(
-					'lg:hidden fixed top-0 left-0 bottom-0 w-[80%] max-w-sm bg-white shadow-lg transform transition-transform duration-300 ease-in-out z-50 h-full',
+					'lg:hidden fixed top-0 left-0 bottom-0 w-[80%] max-w-sm bg-white shadow-lg transform transition-transform duration-300 ease-in-out z-50 h-full overflow-y-auto',
 					mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
 				)}
 			>
@@ -96,7 +120,7 @@ export default function Header() {
 					<div className='relative h-8 w-24'>
 						<Image src={Logo} alt='Logo' fill className='object-contain' />
 					</div>
-					<button onClick={() => setMobileMenuOpen(false)}>
+					<button onClick={closeMobileMenu}>
 						<X className='h-6 w-6 text-gray-700' />
 					</button>
 				</div>
@@ -128,7 +152,7 @@ export default function Header() {
 								<Link
 									href={item.href}
 									className='block py-3 text-gray-700 border-b'
-									onClick={() => setMobileMenuOpen(false)}
+									onClick={closeMobileMenu}
 								>
 									{item.label}
 								</Link>
@@ -143,9 +167,7 @@ export default function Header() {
 				</div>
 			</div>
 
-			{mobileMenuOpen && (
-				<div className='lg:hidden fixed inset-0 bg-black/20 z-40' onClick={() => setMobileMenuOpen(false)} />
-			)}
+			{mobileMenuOpen && <div className='lg:hidden fixed inset-0 bg-black/20 z-40' onClick={closeMobileMenu} />}
 		</header>
 	);
 }
