@@ -39,7 +39,7 @@ export default function Features() {
 									</button>
 								</div>
 
-								<div className='absolute inset-0 bg-black/40 bg-opacity-35 z-10 md:block hidden'></div>
+								<div className='absolute inset-0 bg-black/40 bg-opacity-35 z-10 md:hidden block'></div>
 
 								<div className='absolute right-0 top-0 z-0'>
 									<div className='relative w-full max-w-md'>
