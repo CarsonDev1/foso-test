@@ -19,8 +19,6 @@ export default function DynamicBanner({
 	imageSrc,
 	imageAlt,
 	imageSecond,
-	imageWidth = 500,
-	imageHeight = 500,
 	buttonText = 'Tham Gia Ngay',
 	title = '',
 	onClick,
@@ -30,21 +28,41 @@ export default function DynamicBanner({
 	return (
 		<div className={`rounded-3xl overflow-hidden ${backgroundColor} shadow-lg ${className}`}>
 			<div className='flex flex-col relative items-center justify-between h-full'>
-				<div className='relative'>
-					<div className='relative w-full'>
+				{/* Sửa phần hình ảnh để tương thích tốt hơn với iOS */}
+				<div className='relative w-full'>
+					{/* Sử dụng aspect-ratio để duy trì tỷ lệ khung hình */}
+					<div className='relative w-full aspect-[16/9] overflow-hidden'>
 						<Image
 							src={imageSrc}
-							width={imageWidth}
-							height={imageHeight}
 							alt={imageAlt}
-							className='object-cover w-full h-56'
+							fill
+							sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+							priority
+							className='object-cover object-center'
+							style={{
+								width: '100%',
+								height: '100%',
+								maxHeight: '224px', // Tương đương với h-56 khi ở desktop
+							}}
 						/>
 					</div>
 				</div>
 				<div className='w-full text-white p-6 flex flex-col items-center gap-2 md:gap-4 lg:gap-8'>
-					<div className='h-full md:h-32'>
-						{title !== '' && <h2 className='text-lg md:text-xl font-bold leading-tight'>{title}</h2>}
-						{imageSecond && <Image src={imageSecond} alt='image-second' width={400} height={200} />}
+					<div className='min-h-[5rem] md:min-h-[8rem] w-full flex items-center justify-center'>
+						{title !== '' && (
+							<h2 className='text-lg md:text-xl font-bold leading-tight text-center'>{title}</h2>
+						)}
+						{imageSecond && (
+							<div className='relative w-full h-[100px] md:h-[150px]'>
+								<Image
+									src={imageSecond}
+									alt='image-second'
+									fill
+									sizes='(max-width: 768px) 100vw, 400px'
+									className='object-contain'
+								/>
+							</div>
+						)}
 					</div>
 
 					<button
