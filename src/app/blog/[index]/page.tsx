@@ -22,6 +22,7 @@ import { BlogPost } from '@/types/content';
 import ArticleContent from '@/app/components/common/article-content';
 import DynamicBanner from '@/app/components/common/dynamic-banner';
 import SocialShare from '@/app/components/common/social-share';
+import ReactLenis from 'lenis/react';
 
 const BlogDetail: React.FC = () => {
 	const blogPost: BlogPost = {
@@ -32,99 +33,101 @@ const BlogDetail: React.FC = () => {
 	};
 
 	return (
-		<div className='relative'>
-			<ScrollReveal threshold={0.1} direction='up' delay={0} duration={0.5}>
-				<SocialShare />
-			</ScrollReveal>
+		<ReactLenis root>
+			<div className='relative'>
+				<ScrollReveal threshold={0.1} direction='up' delay={0} duration={0.5}>
+					<SocialShare />
+				</ScrollReveal>
 
-			<ScrollReveal threshold={0.1} direction='up' delay={0.1} duration={0.5}>
-				<Breadcrumb
-					items={[
-						{ text: 'Trang chủ', url: '/' },
-						{ text: 'Tài nguyên', url: '/' },
-						{ text: 'Blog', url: '/' },
-						{ text: 'Quản lý sản xuất', url: '/' },
-					]}
-				/>
-			</ScrollReveal>
+				<ScrollReveal threshold={0.1} direction='up' delay={0.1} duration={0.5}>
+					<Breadcrumb
+						items={[
+							{ text: 'Trang chủ', url: '/' },
+							{ text: 'Tài nguyên', url: '/' },
+							{ text: 'Blog', url: '/' },
+							{ text: 'Quản lý sản xuất', url: '/' },
+						]}
+					/>
+				</ScrollReveal>
 
-			<div className='sec-com'>
-				<div className='container-lg'>
-					<div className='flex gap-4 lg:gap-8 flex-col lg:flex-row'>
-						<div className='space-y-6 relative w-full lg:w-2/3'>
-							{/* Sử dụng ScrollReveal cho header content với delay thấp */}
-							<ScrollReveal threshold={0.1} direction='up' delay={0.2} duration={0.7}>
-								<div className='space-y-4'>
-									<Badge category='Quản lý sản xuất' />
-									<SectionHeading title='Quy trình 5S là gì? Cách ứng dụng hiệu quả nên biết' />
-									<AuthorInfo />
-								</div>
-							</ScrollReveal>
-
-							{/* Hình ảnh hero với ScrollReveal */}
-							<ScrollReveal threshold={0.1} direction='up' delay={0.3} duration={0.8}>
-								<CaptionedImage
-									src={Content01}
-									width={1200}
-									height={800}
-									caption='Quy trình 5s là gì?'
-								/>
-							</ScrollReveal>
-
-							<ScrollReveal threshold={0.1} direction='up' delay={0.2}>
-								<QuoteBlock />
-							</ScrollReveal>
-
-							{renderContentSections()}
-
-							<ScrollReveal threshold={0.1} direction='up'>
-								<ArticleFeedback />
-							</ScrollReveal>
-
-							<div className='space-y-4 md:space-y-6'>
-								<ScrollReveal threshold={0.1} direction='up'>
-									<SectionHeading title='Bài viết liên quan' />
+				<div className='sec-com'>
+					<div className='container-lg'>
+						<div className='flex gap-4 lg:gap-8 flex-col lg:flex-row'>
+							<div className='space-y-6 relative w-full lg:w-2/3'>
+								{/* Sử dụng ScrollReveal cho header content với delay thấp */}
+								<ScrollReveal threshold={0.1} direction='up' delay={0.2} duration={0.7}>
+									<div className='space-y-4'>
+										<Badge category='Quản lý sản xuất' />
+										<SectionHeading title='Quy trình 5S là gì? Cách ứng dụng hiệu quả nên biết' />
+										<AuthorInfo />
+									</div>
 								</ScrollReveal>
 
-								<ScrollRevealGrid
-									className='grid grid-cols-2 md:grid-cols-3 gap-6'
-									itemDelay={0.1}
-									staggerChildren={0.15}
-									direction='up'
-									threshold={0.05}
-								>
-									{Array.from({ length: 3 }).map((_, index) => (
-										<BlogGrid key={index} posts={blogPost} index={index} />
-									))}
-								</ScrollRevealGrid>
-							</div>
-						</div>
-
-						<div className='w-full lg:w-1/4 flex flex-col gap-6 sticky top-28 h-fit'>
-							<ScrollReveal direction='left' threshold={0.1} delay={0.3}>
-								<ArticleContent />
-							</ScrollReveal>
-
-							<ScrollReveal direction='left' threshold={0.1} delay={0.5}>
-								<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-2 md:gap-4 lg:gap-8'>
-									<DynamicBanner
-										imageSrc='/images/devices.png'
-										imageAlt='feature-banner'
-										buttonText='Trải nghiệm ngay'
-										imageSecond='/images/free-img.png'
+								{/* Hình ảnh hero với ScrollReveal */}
+								<ScrollReveal threshold={0.1} direction='up' delay={0.3} duration={0.8}>
+									<CaptionedImage
+										src={Content01}
+										width={1200}
+										height={800}
+										caption='Quy trình 5s là gì?'
 									/>
-									<DynamicBanner
-										imageSrc='/images/feature-banner.png'
-										imageAlt='feature-banner'
-										title='Gia nhập cộng đồng FMRP Việt – Kết nối, chia sẻ, cùng phát triển!'
-									/>
+								</ScrollReveal>
+
+								<ScrollReveal threshold={0.1} direction='up' delay={0.2}>
+									<QuoteBlock />
+								</ScrollReveal>
+
+								{renderContentSections()}
+
+								<ScrollReveal threshold={0.1} direction='up'>
+									<ArticleFeedback />
+								</ScrollReveal>
+
+								<div className='space-y-4 md:space-y-6'>
+									<ScrollReveal threshold={0.1} direction='up'>
+										<SectionHeading title='Bài viết liên quan' />
+									</ScrollReveal>
+
+									<ScrollRevealGrid
+										className='grid grid-cols-2 md:grid-cols-3 gap-6'
+										itemDelay={0.1}
+										staggerChildren={0.15}
+										direction='up'
+										threshold={0.05}
+									>
+										{Array.from({ length: 3 }).map((_, index) => (
+											<BlogGrid key={index} posts={blogPost} index={index} />
+										))}
+									</ScrollRevealGrid>
 								</div>
-							</ScrollReveal>
+							</div>
+
+							<div className='w-full lg:w-1/4 flex flex-col gap-6 sticky top-28 h-fit'>
+								<ScrollReveal direction='left' threshold={0.1} delay={0.3}>
+									<ArticleContent />
+								</ScrollReveal>
+
+								<ScrollReveal direction='left' threshold={0.1} delay={0.5}>
+									<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-2 md:gap-4 lg:gap-8'>
+										<DynamicBanner
+											imageSrc='/images/devices.png'
+											imageAlt='feature-banner'
+											buttonText='Trải nghiệm ngay'
+											imageSecond='/images/free-img.png'
+										/>
+										<DynamicBanner
+											imageSrc='/images/feature-banner.png'
+											imageAlt='feature-banner'
+											title='Gia nhập cộng đồng FMRP Việt – Kết nối, chia sẻ, cùng phát triển!'
+										/>
+									</div>
+								</ScrollReveal>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+		</ReactLenis>
 	);
 };
 
